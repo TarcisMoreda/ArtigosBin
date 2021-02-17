@@ -136,7 +136,7 @@ def salvar(id, titulo, data, base_dados, tecnica, acuracia, precisao, deficienci
     else:
         try:
             dict_artigo = [
-                id,
+                str(id),
                 titulo,
                 data,
                 base_dados,
@@ -182,10 +182,11 @@ def alterar(id, titulo, data, base_dados, tecnica, acuracia, precisao, deficienc
     else:
         try:
             dict_artigo = [
-                id,
+                str(id),
                 titulo,
                 data,
                 base_dados,
+                tecnica,
                 acuracia,
                 precisao,
                 deficiencia,
@@ -196,13 +197,11 @@ def alterar(id, titulo, data, base_dados, tecnica, acuracia, precisao, deficienc
             dict_arquivo = pickle.load(arquivo)
             arquivo.close()
 
+            for i, j in enumerate(dict_arquivo):
+                if j[0] == dict_artigo[0]:
+                    dict_arquivo[i] = dict_artigo
+            
             arquivo = open('db.dat', 'wb')
-
-            for i in dict_arquivo:
-                if dict_artigo[0] == i[0]:
-                    index = dict_arquivo.index(i)
-                    dict_arquivo[index] = dict_artigo
-
             pickle.dump(dict_arquivo, arquivo)
 
             messagebox.showinfo('Sucesso', 'Registro alterado com sucesso.')
@@ -220,12 +219,16 @@ def excluir(id):
         return
 
     try:
-        arquivo = open('db.dat', 'wrb')
+        arquivo = open('db.dat', 'rb')
         dict_arquivo = pickle.load(arquivo)
+        arquivo.close()
 
-        for registros in dict_arquivo:
-                if dict_arquivo[registros].get('ID') == id:
-                    dict_arquivo[registros].pop()
+        for i, j in enumerate(dict_arquivo):
+            if j[0] == str(id):
+                dict_arquivo.pop(i)
+
+        arquivo = open('db.dat', 'wb')
+        pickle.dump(dict_arquivo, arquivo)
 
         messagebox.showinfo('Sucesso', 'Registro excluído com sucesso.')
 
