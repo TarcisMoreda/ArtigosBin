@@ -10,7 +10,7 @@ from tkcalendar import *
 
 try:
     arquivo = open('db.dat', 'rb')
-    print(pickle.load(arquivo))
+    pickle.load(arquivo)
 
 except:
     arquivo = open('db.dat', 'wb')
@@ -149,7 +149,6 @@ def salvar(id, titulo, data, base_dados, tecnica, acuracia, precisao, deficienci
 
             arquivo = open('db.dat', 'rb')
             dict_arquivo = pickle.load(arquivo)
-            arquivo.close()
             
             dict_arquivo.append(dict_artigo)
 
@@ -195,7 +194,6 @@ def alterar(id, titulo, data, base_dados, tecnica, acuracia, precisao, deficienc
 
             arquivo = open('db.dat', 'rb')
             dict_arquivo = pickle.load(arquivo)
-            arquivo.close()
 
             for i, j in enumerate(dict_arquivo):
                 if j[0] == dict_artigo[0]:
@@ -221,7 +219,6 @@ def excluir(id):
     try:
         arquivo = open('db.dat', 'rb')
         dict_arquivo = pickle.load(arquivo)
-        arquivo.close()
 
         for i, j in enumerate(dict_arquivo):
             if j[0] == str(id):
