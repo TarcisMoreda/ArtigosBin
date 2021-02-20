@@ -8,8 +8,8 @@ Foi feito pelo aluno Tárcis M. P. M. de Melo  estudante do IFTM de Ituiutaba co
 
 ## Funcionalidades:
 - Registro de artigos em arquivo serializado binário
-- Alteração dos registros
-- Apagamento dos registros
+- Alteração de registros
+- Exclusão de registros
 - Visualização dos registros dentro do programa
 - Exportação dos registros para arquivo .xlsx(Excel)
 
